@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package fcw.weather;
+
+// Weather data message
+message WeatherData {
+    string location = 1;
+    string condition = 2;
+    double temperature = 3;
+    double humidity = 4;
+    double wind_speed = 5;
+    double visibility = 6;
+    string description = 7;
+    int64 timestamp = 8;
+}
+
+// Location data message
+message LocationData {
+    double latitude = 1;
+    double longitude = 2;
+    double accuracy = 3;
+    string address = 4;
+    int64 timestamp = 5;
+}
+
+// Risk analysis message
+message RiskAnalysis {
+    string condition = 1;
+    string visibility_level = 2;
+    string road_risk = 3;
+    string driver_advice = 4;
+    double risk_multiplier = 5;
+    int64 timestamp = 6;
+}
+
+// Request/Response messages
+message WeatherRequest {
+    LocationData location = 1;
+}
+
+message WeatherResponse {
+    WeatherData weather = 1;
+    RiskAnalysis risk = 2;
+    bool success = 3;
+    string error_message = 4;
+}
+
+// Weather service definition
+service WeatherService {
+    rpc GetWeatherData(WeatherRequest) returns (WeatherResponse);
+    rpc StreamWeatherUpdates(WeatherRequest) returns (stream WeatherResponse);
+} 
