@@ -36,7 +36,7 @@ Our project demonstrates a reusable framework where GenAI assists in every phase
   - Optimized input resolution (416px) for speed-accuracy trade-off
   - Custom anchor optimization for automotive use-cases
   - Agnostic NMS for faster post-processing
-  - GPU acceleration with CUDA support
+  - Hardware acceleration via Metal & Core ML on Apple Silicon
 
 ### 3.2 Advanced Tracking & Motion Prediction
 - **Enhanced Kalman Filter Implementation:**
@@ -104,7 +104,7 @@ graph TD
 - **Python Ecosystem:**
   - Python 3.10+ for modern type hints, async/await, and performance improvements
   - NumPy/Pandas for efficient numerical computations and data manipulation
-  - OpenCV 4.8+ with hardware acceleration support (CUDA, OpenCL)
+  - OpenCV 4.8+ with hardware acceleration support (e.g., Metal API)
 
 ### 4.2 UI & Real-Time Processing
 - **PyQt5 Framework:**
@@ -117,7 +117,6 @@ graph TD
 - **Detection & Tracking:**
   - YOLOv11n with ONNX Runtime optimization for maximum inference speed
   - Custom Kalman filter implementation with motion prediction algorithms
-  - TensorRT acceleration support for NVIDIA GPUs
   - Multi-method distance estimation and real-world coordinate transformation
 
 ### 4.4 External Services Integration
@@ -460,5 +459,5 @@ This project is a successful proof-of-concept for a new era of automotive softwa
 
 *   **Embedded Target Generation:** Use the AI Co-Pilot to translate the Python PoC into MISRA-compliant, optimized C++ for deployment on automotive-grade hardware.
 *   **End-to-End Test Case Generation:** Leverage GenAI to read system requirements and automatically generate a comprehensive suite of unit and integration tests.
-*   **Digital Twin Integration:** Connect the system to industry-standard simulators like CARLA or NVIDIA DriveSim for large-scale, automated scenario testing.
+*   **Digital Twin Integration:** Connect the system to industry-standard simulators like CARLA for large-scale, automated scenario testing.
 *   **On-Device AI:** Fine-tune a smaller, specialized LLM on automotive safety data for efficient, low-latency execution directly within the vehicle's ECU. 
