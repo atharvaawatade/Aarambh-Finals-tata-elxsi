@@ -1,10 +1,17 @@
 # FCW-Pro: A GenAI-Accelerated Framework for Next-Generation ADAS
 
-## 1. The Challenge: Breaking the ADAS Development Bottleneck
+## 1. The Problem vs. Our Solution: A New Paradigm for ADAS Development
 
-Advanced Driver-Assistance Systems (ADAS) like Forward Collision Warning are critical for vehicle safety, but their development is notoriously complex, slow, and expensive. The automotive industry needs a paradigm shift to accelerate the software lifecycle from concept to production while adhering to stringent functional safety standards.
+### The Problem
+- **Challenge:** Developing safety-critical ADAS features like Forward Collision Warning (FCW) is traditionally slow, complex, and resource-intensive, creating a major bottleneck for the automotive industry.
+- **The Mandate:** Use Generative AI to radically accelerate the entire software lifecycle—from concept and coding to validation and deployment—for a production-ready FCW system.
+- **The Goal:** Deliver a fully functional, reliable, and scalable FCW solution that is demonstrably effective and compliant with automotive standards.
 
-**The Hackathon Challenge:** Develop an innovative, GenAI-based solution to accelerate the development, validation, and deployment of a feature-complete FCW system.
+### Our Solution: FCW-Pro
+- **A GenAI Force Multiplier:** We developed a complete, high-performance FCW system by treating GenAI as an **AI Co-Pilot**. This strategy amplified our small team's development capacity by over **200%**, enabling the output of a much larger team.
+- **A Feature-Complete Application:** Our solution delivers a real-time, multi-threaded application with advanced perception (YOLOv11n + Kalman Tracking), dynamic risk assessment, and intelligent, context-aware warnings powered by the Gemini API.
+- **A Robust Validation Framework:** We prove the system's reliability and adaptability by testing it in industry-standard simulators—**CARLA** for complex automotive scenarios and **Gazebo with ROS 2** for robotics domain adaptation.
+- **An End-to-End Accelerated Workflow:** We successfully leveraged multiple AI models across the entire development lifecycle to deliver a production-quality system in a hackathon timeframe, setting a new benchmark for efficiency.
 
 ---
 
