@@ -365,17 +365,85 @@ This GenAI-driven approach directly addresses the hackathon's core challenge of 
 
 ---
 
-## 12. System Demonstration & Validation
+## 12. Advanced Simulation & Validation Framework
 
-The effectiveness of the FCW-Pro system is validated in real-time through a custom-built simulation environment. The demo showcases:
+To ensure the robustness and adaptability of our system, we have developed a comprehensive validation framework that integrates with industry-standard simulators. This allows for rigorous, repeatable testing in a variety of controlled environments, from automotive ADAS scenarios to indoor robotics, demonstrating a true "software-in-the-loop" methodology.
 
-1.  **Live Perception:** The system's video feed displaying detected objects with color-coded bounding boxes indicating risk level.
-2.  **Dynamic Overlays:** Real-time data on object ID, distance, speed, and TTC overlaid on the video.
-3.  **Intelligent Warnings:** The primary Gemini-generated warning displayed prominently, changing dynamically with the situation.
+### 12.1 CARLA: High-Fidelity ADAS Scenario Testing
 
-*(This section is a template for a screenshot or video of your game-based simulator.)*
+We leverage the high-fidelity CARLA simulator to test our FCW system in dynamic, realistic urban driving environments. Our enhanced `plugins/carla_simulator.py` module runs a full software-in-the-loop test, validating the entire perception-to-warning pipeline.
 
-![image](https://user-images.githubusercontent.com/12345/67890.png)
+**Advanced Integration Architecture:**
+```mermaid
+graph TD
+    subgraph CARLA Simulator
+        A[Physics Engine] --> B(Weather & Lighting);
+        A --> C(Dynamic Vehicle/Pedestrian AI);
+    end
+    
+    subgraph FCW-Pro System (Live Demo)
+        D[CARLA Client<br/>plugins/carla_simulator.py]
+        E(Multi-Sensor Handler<br/>RGB + Depth)
+        F(FCW Perception Pipeline)
+        G(Visualization Engine<br/>utils/helpers.py)
+        H((Live Display))
+        
+        D --> E --> F --> G --> H
+    end
+
+    C --> |Virtual Sensor Feeds| D;
+    B --> |Dynamic Conditions| D;
+    
+    style F fill:#cde4ff,stroke:#333,stroke-width:2px
+```
+
+**Advanced Capabilities:**
+-   **Dynamic Scenario Generation:** The simulation automatically spawns **20+ vehicles and 50+ pedestrians**, all with their own AI and autopilot, creating a chaotic and unpredictable environment to test the tracker's robustness.
+-   **Multi-Sensor Fusion (Readiness):** The system now processes both **RGB and Depth camera** data simultaneously, demonstrating the architecture's readiness for sensor fusion techniques.
+-   **Live Software-in-the-Loop:** The test script runs our **entire FCW pipeline**—from detection and tracking to risk analysis and warning generation—on every frame from the simulator.
+-   **Integrated Visualization:** Detections, tracking data, and warnings are drawn directly onto the simulator's output video, providing immediate visual feedback on the system's performance.
+
+### 12.2 Gazebo & ROS 2: Robotics and Domain Adaptation
+
+To prove the versatility of our core perception logic, we have adapted it for indoor robotics using Gazebo and ROS 2. The `plugins/gazebo_simulator.py` module reimagines our FCW system as a "Forward Obstacle Warning" system for a TurtleBot, showcasing its applicability beyond automotive.
+
+**Advanced Integration Architecture & The Construct Connectivity:**
+```mermaid
+graph TD
+    subgraph The Construct Platform (Remote)
+        A[Web-based IDE &<br/>Jupyter Notebooks]
+        B[Remote ROS 2 Services<br/>via Ngrok Tunnel]
+        A --> B
+    end
+
+    subgraph Local Machine
+        subgraph Gazebo & ROS 2
+            C(Simulated Warehouse)
+            D(TurtleBot with Camera)
+            I(RViz<br/>Visualization Tool)
+        end
+        subgraph FCW-Pro ROS 2 Node
+            E(Gazebo Bridge<br/>plugins/gazebo_simulator.py)
+            F(FCW Perception Pipeline)
+        end
+        G(pyngrok Tunnel)
+    end
+    
+    D -- Camera Topic --> E;
+    E -- Processed with --> F;
+    F -- Control Logic --> E;
+    E -- Proportional Control & Stop --> D;
+    F -- Visualization Markers --> I;
+    B <===> G;
+
+    style F fill:#cde4ff,stroke:#333,stroke-width:2px
+```
+
+**Advanced Capabilities:**
+-   **Domain Adaptation:** The same YOLOv11n and Kalman tracking algorithms are repurposed to detect and track obstacles in a warehouse environment.
+-   **Proportional Control:** Instead of a simple stop, the robot now **intelligently slows down** as it approaches an obstacle before coming to a full stop, demonstrating more nuanced control logic.
+-   **RViz Visualization:** The node publishes `visualization_msgs/MarkerArray` topics, allowing the detected bounding boxes and their risk levels to be **visualized in 3D within RViz**, a standard professional robotics tool.
+-   **Robust Remote Collaboration:** The integration now uses the `pyngrok` library to create a stable TCP tunnel, allowing developers to reliably connect and control the ROS 2 simulation from cloud platforms like **The Construct**.
 
 ---
 
