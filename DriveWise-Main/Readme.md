@@ -383,12 +383,12 @@ We leverage the high-fidelity CARLA simulator to test our FCW system in dynamic,
 **Advanced Integration Architecture:**
 ```mermaid
 graph TD
-    subgraph CARLA Simulator
+    subgraph "CARLA Simulator"
         A[Physics Engine] --> B(Weather & Lighting);
         A --> C(Dynamic Vehicle/Pedestrian AI);
     end
     
-    subgraph FCW-Pro System (Live Demo)
+    subgraph "FCW-Pro System (Live Demo)"
         D[CARLA Client<br/>plugins/carla_simulator.py]
         E(Multi-Sensor Handler<br/>RGB + Depth)
         F(FCW Perception Pipeline)
@@ -417,19 +417,19 @@ To prove the versatility of our core perception logic, we have adapted it for in
 **Advanced Integration Architecture & The Construct Connectivity:**
 ```mermaid
 graph TD
-    subgraph The Construct Platform (Remote)
+    subgraph "The Construct Platform (Remote)"
         A[Web-based IDE &<br/>Jupyter Notebooks]
         B[Remote ROS 2 Services<br/>via Ngrok Tunnel]
         A --> B
     end
 
-    subgraph Local Machine
-        subgraph Gazebo & ROS 2
+    subgraph "Local Machine"
+        subgraph "Gazebo & ROS 2"
             C(Simulated Warehouse)
             D(TurtleBot with Camera)
             I(RViz<br/>Visualization Tool)
         end
-        subgraph FCW-Pro ROS 2 Node
+        subgraph "FCW-Pro ROS 2 Node"
             E(Gazebo Bridge<br/>plugins/gazebo_simulator.py)
             F(FCW Perception Pipeline)
         end
